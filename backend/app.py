@@ -1,6 +1,6 @@
 
 
-#from flask import  request, jsonify, make_response, json
+from flask import  request, jsonify, make_response, json
 from flask_sqlalchemy import SQLAlchemy
 from  werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
@@ -86,6 +86,7 @@ def Delete(id):
 def signup():
     # creates a dictionary of the form data
     data = request.get_json()
+    print(data)
   
     # gets name, email and password
     name = data.get('name'), 
@@ -102,8 +103,8 @@ def signup():
         )
         # insert user
         #db.add(data)
-        db.session.add(data)
-        db.session.commit()
+        #db.session.add(data)
+        #db.session.commit()
         
 
         return make_response('Successfully registered.',  200)

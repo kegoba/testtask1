@@ -1,7 +1,6 @@
 import React, { Component} from "react"
-import axios from "axios";
-import { Navigate } from "react-router-dom";
-
+import { Navigate } from "react-router-dom"
+import {axios } from 'axios';
 const BASE_URL =  'http://localhost:5000/api/v1/'
 class Addtodo extends Component{
     constructor(props){
@@ -63,7 +62,7 @@ handlePostContent = async (e) =>{
   })
 
   }else{
-    alert("Please Enter a Valid Data")
+   
     this.setState({
      description: " ",
       tittle : " "
@@ -95,6 +94,7 @@ handlePostContent = async (e) =>{
                 type="text"
                 className="form-control text-center"
                 placeholder="Enter Tittle"
+                id="transferFunds_to"
               />
             </div>
             <div className="form-group">
@@ -104,10 +104,11 @@ handlePostContent = async (e) =>{
                 type="text"
                 className="form-control password text-center"
                 placeholder="Enter Content"
+                id="transferFunds_to"
               />
             </div>
              
-            <button type="submit" className="btn btn-primary btn-customized mt-4" onClick={this.handlePostContent}>
+            <button type="submit" data-testid="submit-btn" className="btn btn-primary btn-customized mt-4" onClick={this.handlePostContent}>
               Post
             </button>
           </form>

@@ -1,29 +1,25 @@
 from copy import deepcopy
 import unittest
 import json
-import app
+
 import tempfile
 from setting import db, app
 
 from flask import current_app
 
-
-app = app('config')
-
-
-
 BASE_URL = 'http://127.0.0.1:5000/api/v1/'
+
 
 class TestFlaskApi(unittest.TestCase):
     def setUp(self):
         self.app = app
         self.app.testing = True
+        self.app = app.test_client()
 
-        with self.app.app_context():
-            self.test_app = current_app.test_client()
+        db.create_all()
 
-    def test_get_all(self):
-        response = self.app.get(BASE_URL+'displayall')
+    def test_get_all(client):
+        response = client.get(BASE_URL+'displayall')
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.data)
 
@@ -75,11 +71,9 @@ class TestFlaskApi(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         
     def tearDown(self):
-        # reset app.items to initial state
-        #db.drop_all()
-        pass
+        db.drop_all()
 
-    
+ 
 
 if __name__ == "__main__":
     unittest.main()
